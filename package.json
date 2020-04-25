@@ -4,6 +4,11 @@
 	"description": "Customize indentation rules ",
 	"version": "0.0.1",
 	"license": "MIT",
+	"publisher": "garaemon",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/garaemon/vscode-customize-indentation-rules"
+	},
 	"engines": {
 		"vscode": "^1.44.0"
 	},

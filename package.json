@@ -1,0 +1,73 @@
+{
+	"name": "customize-indentation-rules",
+	"displayName": "customize-indentation-rules",
+	"description": "Customize indentation rules ",
+	"version": "0.0.1",
+	"license": "MIT",
+	"engines": {
+		"vscode": "^1.44.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:customize-indentation-rules.updateIndentationRules",
+		"*"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "customize-indentation-rules.updateIndentationRules",
+				"title": "Update Indentation Rules"
+			}
+		],
+		"configuration": {
+			"title": "customize-indentation-rules",
+			"properties": {
+				"customizeIndentationRules": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"title": "rules",
+						"properties": {
+							"language": {
+								"type": "string",
+								"description": "Language name such as cpp, typescript and so on"
+							},
+							"increaseIndentationPattern": {
+								"type": "string",
+								"description": "Regular expression for increaseIndentationPattern"
+							},
+							"decreaseIndentationPattern": {
+								"type": "string",
+								"description": "Regular expression for decreaseIndentationPattern"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint src --ext ts",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.44.0",
+		"@types/glob": "^7.1.1",
+		"@types/mocha": "^7.0.2",
+		"@types/node": "^13.11.0",
+		"eslint": "^6.8.0",
+		"@typescript-eslint/parser": "^2.26.0",
+		"@typescript-eslint/eslint-plugin": "^2.26.0",
+		"glob": "^7.1.6",
+		"mocha": "^7.1.1",
+		"typescript": "^3.8.3",
+		"vscode-test": "^1.3.0"
+	}
+}

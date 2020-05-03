@@ -4,8 +4,8 @@ import * as vscode from 'vscode';
 
 interface RuleSetting {
   language: string;
-  increaseIndentationPattern: string;
-  decreaseIndentationPattern: string;
+  increaseIndentationPattern: string | undefined;
+  decreaseIndentationPattern: string | undefined;
 }
 
 function updateLanguageConfigurations() {
@@ -15,14 +15,15 @@ function updateLanguageConfigurations() {
     return;
   }
   for (const rule of rules) {
-		const increaseIndentationPattern = new RegExp(rule.increaseIndentationPattern);
-		const decreaseIndentationPattern = new RegExp(rule.decreaseIndentationPattern);
-		 vscode.languages.setLanguageConfiguration(rule.language, {
-			 indentationRules: {
-				 increaseIndentPattern: increaseIndentationPattern,
-				 decreaseIndentPattern: decreaseIndentationPattern
-			 }
-		 });
+    // '$^' is an invalid regular expression which does not match any strings
+    const increaseIndentationPattern = new RegExp(rule.increaseIndentationPattern || '$^');
+    const decreaseIndentationPattern = new RegExp(rule.decreaseIndentationPattern || '$^');
+    vscode.languages.setLanguageConfiguration(rule.language, {
+      indentationRules: {
+        increaseIndentPattern: increaseIndentationPattern,
+        decreaseIndentPattern: decreaseIndentationPattern,
+      },
+    });
   }
 }
 
